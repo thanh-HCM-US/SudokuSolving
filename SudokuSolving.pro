@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         FinishedInputButton.cpp \
         Gridpart.cpp \
+        Mediator.cpp \
         RequestPart.cpp \
         Sudoku.cpp \
         main.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 HEADERS += \
         FinishedInputButton.h \
         Gridpart.h \
+        Mediator.h \
         RequestPart.h \
         Sudoku.h \
         mainwindow.h

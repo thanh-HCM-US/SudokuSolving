@@ -3,6 +3,8 @@
 #include <iostream>
 #include <QString>
 
+#include "Mediator.h"
+
 QString convertItoString(unsigned int i)
 {
     QString strConverted;
@@ -42,12 +44,13 @@ QString convertItoString(unsigned int i)
 
 Sudoku::Sudoku()
     : m_mainValue(0),
-      m_subValue(511)   // 511 == 0x111111111
+      m_subValue(511),   // 511 == 0x111111111
+      m_hasMainValue(false)
 
 {
     this->setFrameStyle(QFrame::Box);
-    this->setFixedSize(40,40);
-    showSubValue();
+    this->setFixedSize(45,45);
+    connect(this, &QTextEdit::textChanged, this, &Sudoku::setMainValue);
 }
 
 Sudoku::~Sudoku()
@@ -56,7 +59,15 @@ Sudoku::~Sudoku()
 }
 
 void Sudoku::showMainValue()
-{}
+{
+
+    QTextCursor textCursor = this->textCursor();
+    this->selectAll();
+    this->setFontPointSize(18);
+    this->setAlignment(Qt::AlignCenter);
+    this->setTextColor(Qt::blue);
+    this->setTextCursor(textCursor);
+}
 
 void Sudoku::showSubValue()
 {
@@ -80,7 +91,7 @@ void Sudoku::showSubValue()
         {/*nothing todo*/}
         else
         {
-            strSubValue += "   ";
+            strSubValue += " ";
         }
     }
 
@@ -89,11 +100,52 @@ void Sudoku::showSubValue()
     this->selectAll();
     this->setFontPointSize(6);
     this->setAlignment(Qt::AlignCenter);
-    this->setTextColor(Qt::blue);
     this->setTextCursor(textCursor);
 }
 
-void Sudoku::setMainValue(unsigned int)
+void Sudoku::setMainValue()
+{
+    if (m_finishedInput == true)
+    {
+        return;
+    }
+    QString str = this->toPlainText();
+    unsigned int mainValue;
+    mainValue = static_cast<unsigned int>(str.toInt());
+    if ((mainValue > 9) )//|| (m_mainValue < 1))
+    {
+        this->clear();
+        mainValue = 0;
+        for (int i=0; i<3; ++i)     //for case clear m_mainValue
+        {
+            m_vectorMediator[i]->allotherSudokuUpdateAdd(this, m_mainValue);
+        }
+        m_mainValue = 0;
+        return;
+    }
+    if (mainValue == 0)
+    {
+        m_hasMainValue = false;
+        return;
+    }
+
+    if (m_mainValue!=0)         //for case changing m_mainValue
+    {
+        for (int i=0; i<3; ++i)
+        {
+            m_vectorMediator[i]->allotherSudokuUpdateAdd(this, m_mainValue);
+        }
+    }
+
+    m_mainValue = mainValue;
+    for (int i=0; i<3; ++i)
+    {
+        m_vectorMediator[i]->allotherSudokuUpdateRemove(this, m_mainValue);
+    }
+    m_hasMainValue = true;
+}
+
+void Sudoku::updateMainValue()
 {}
 
 unsigned int Sudoku::getMainValue()
@@ -101,17 +153,42 @@ unsigned int Sudoku::getMainValue()
     return m_mainValue;
 }
 
-void Sudoku::updateMainValue()
-{}
-
 void Sudoku::updateSubValueAdd(unsigned int addValue)
 {
-    m_subValue = m_subValue | (1 << (addValue - 1));
-    showSubValue();
+    if (!m_hasMainValue)
+    {
+        m_subValue = m_subValue | (1 << (addValue - 1));
+        if (m_finishedInput)
+        {
+            showSubValue();
+        }
+    }
 }
 
 void Sudoku::updateSubValueRemove(unsigned int removeValue)
 {
-    m_subValue = m_subValue & (511 - (1 << (removeValue - 1)));
-    showSubValue();
+    if (!m_hasMainValue)
+    {
+        m_subValue = m_subValue & (511 - (1 << (removeValue - 1)));
+        if (m_finishedInput)
+        {
+            showSubValue();
+        }
+    }
+}
+
+bool Sudoku::isHasMainValue()
+{
+    return m_hasMainValue;
+}
+
+void Sudoku::setFinishedInput(bool isFinishedInput)
+{
+    m_finishedInput = isFinishedInput;
+}
+
+void Sudoku::addMediator(Mediator* mediator)
+{
+    m_vectorMediator.append(mediator);
+    mediator->addSudoku(this);
 }

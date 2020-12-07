@@ -11,15 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setLayout(new QHBoxLayout());
 
     QHBoxLayout* hBoxLayout = qobject_cast<QHBoxLayout*>(this->layout());
-    GridPart* gridPart = new GridPart();
-    RequestPart* requestPart = new RequestPart(this);
 
-    hBoxLayout->addWidget(gridPart);
-    hBoxLayout->addWidget(requestPart);
+    m_gridPart = new GridPart();
+    m_requestPart = new RequestPart(this);
+
+    hBoxLayout->addWidget(m_gridPart);
+    hBoxLayout->addWidget(m_requestPart);
     setLayout(hBoxLayout);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::finishedInputButtonClicked()
+{
+    m_gridPart->finishedInputButtonClicked();
 }

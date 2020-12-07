@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include <QApplication>
-#define qApp (static_cast<QCoreApplication::instance()>)
 
 int main(int argc, char *argv[])
 {

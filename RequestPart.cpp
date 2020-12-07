@@ -3,7 +3,12 @@
 #include <QVBoxLayout>
 #include <QCoreApplication>
 
-RequestPart::RequestPart(QWidget *parent) : QWidget(parent)
+#include "mainwindow.h"
+class MainWindow;
+
+RequestPart::RequestPart(MainWindow *parent)
+    : QWidget(parent),
+      m_parent(parent)
 {
     QVBoxLayout* vBoxLayout = new QVBoxLayout(this);
 
@@ -34,4 +39,9 @@ RequestPart::~RequestPart()
 {
     delete m_stepByStep;
     delete m_finalResult;
+}
+
+void RequestPart::finishedInputButtonClicked()
+{
+    m_parent->finishedInputButtonClicked();
 }

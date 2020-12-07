@@ -4,12 +4,16 @@
 #include <QWidget>
 #include <QPushButton>
 
+class MainWindow;
+
 class RequestPart : public QWidget
 {
     Q_OBJECT
 public:
-    explicit RequestPart(QWidget *parent = nullptr);
+    explicit RequestPart(MainWindow *parent = nullptr);
     virtual ~RequestPart();
+
+    void finishedInputButtonClicked();
 
 signals:
 
@@ -20,6 +24,9 @@ private:
     QPushButton* m_stepByStep;
     QPushButton* m_finalResult;
     QPushButton* m_quit;
+
+    //QWidget* m_parent;
+    MainWindow* m_parent;
 };
 
 #endif // REQUESTPART_H
