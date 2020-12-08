@@ -25,7 +25,11 @@ private:
     Ui::MainWindow *ui;
 
     GridPart* m_gridPart;
-    RequestPart* m_requestPart;
+    QPushButton* m_inputFromSource;
+    QPushButton* m_finishedInput;
+    QPushButton* m_stepByStep;
+    QPushButton* m_finalResult;
+    QPushButton* m_quit;
 };
 
 #endif // MAINWINDOW_H

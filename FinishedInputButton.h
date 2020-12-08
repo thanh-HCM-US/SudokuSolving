@@ -4,14 +4,15 @@
 #include <QWidget>
 #include <QPushButton>
 #include "RequestPart.h"
+#include "mainwindow.h"
 
-class RequestPart;
+class MainWindow;
 
 class FinishedInputButton : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit FinishedInputButton(QString, RequestPart *parent = nullptr);
+    explicit FinishedInputButton(QString, MainWindow *parent = nullptr);
 
 signals:
 
@@ -20,7 +21,7 @@ public slots:
 
 private:
     bool m_clicked;
-    RequestPart* m_parent;
+    MainWindow* m_parent;
 };
 
 #endif // FINISHEDINPUTBUTTON_H

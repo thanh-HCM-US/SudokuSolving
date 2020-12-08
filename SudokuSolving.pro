@@ -39,7 +39,8 @@ HEADERS += \
         Mediator.h \
         RequestPart.h \
         Sudoku.h \
-        mainwindow.h
+        mainwindow.h \
+        utility.h
 
 FORMS += \
         mainwindow.ui

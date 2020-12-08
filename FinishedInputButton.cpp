@@ -3,7 +3,7 @@
 #include <QtDebug>
 #include <QTime>
 
-FinishedInputButton::FinishedInputButton(QString string, RequestPart *parent)
+FinishedInputButton::FinishedInputButton(QString string, MainWindow *parent)
     : QPushButton (string, parent),
       m_clicked(false),
       m_parent(parent)

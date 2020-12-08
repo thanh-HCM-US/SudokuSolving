@@ -16,8 +16,17 @@ public:
 
     void addSudoku(Sudoku*);
 
+    QVector<Sudoku*> getVectorSudoku()
+    {
+        return m_vectorSudoku;
+    }
+
     void allotherSudokuUpdateRemove(Sudoku*, unsigned int);
+    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, unsigned int);
+    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, Sudoku*, unsigned int);
     void allotherSudokuUpdateAdd(Sudoku*, unsigned int);
+    void allotherSudokuUpdateAdd(Sudoku*, Sudoku*, unsigned int);
+    void allotherSudokuUpdateAdd(Sudoku*, Sudoku*, Sudoku*, unsigned int);
 
 private:
     QVector<Sudoku*> m_vectorSudoku;

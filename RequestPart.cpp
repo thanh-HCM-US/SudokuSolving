@@ -12,8 +12,8 @@ RequestPart::RequestPart(MainWindow *parent)
 {
     QVBoxLayout* vBoxLayout = new QVBoxLayout(this);
 
-    m_finishedInput = new FinishedInputButton("Finished Input", this);
-    m_finishedInput->resize(150,40);
+    //m_finishedInput = new FinishedInputButton("Finished Input", this);
+    //m_finishedInput->resize(150,40);
 
     m_stepByStep = new QPushButton("Step By Step", this);
     m_stepByStep->resize(150, 40);

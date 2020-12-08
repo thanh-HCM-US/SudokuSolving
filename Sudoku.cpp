@@ -4,6 +4,7 @@
 #include <QString>
 
 #include "Mediator.h"
+#include "utility.h"
 
 QString convertItoString(unsigned int i)
 {
@@ -45,8 +46,9 @@ QString convertItoString(unsigned int i)
 Sudoku::Sudoku()
     : m_mainValue(0),
       m_subValue(511),   // 511 == 0x111111111
-      m_hasMainValue(false)
-
+      m_numSubValue(9),
+      m_hasMainValue(false),
+      m_finishedInput(false)
 {
     this->setFrameStyle(QFrame::Box);
     this->setFixedSize(45,45);
@@ -105,10 +107,10 @@ void Sudoku::showSubValue()
 
 void Sudoku::setMainValue()
 {
-    if (m_finishedInput == true)
+    /*if (m_finishedInput == true)
     {
         return;
-    }
+    }*/
     QString str = this->toPlainText();
     unsigned int mainValue;
     mainValue = static_cast<unsigned int>(str.toInt());
@@ -145,7 +147,7 @@ void Sudoku::setMainValue()
     m_hasMainValue = true;
 }
 
-void Sudoku::updateMainValue()
+void Sudoku::updateMainValue(unsigned int value)
 {}
 
 unsigned int Sudoku::getMainValue()
@@ -158,9 +160,10 @@ void Sudoku::updateSubValueAdd(unsigned int addValue)
     if (!m_hasMainValue)
     {
         m_subValue = m_subValue | (1 << (addValue - 1));
+        checkNumSubValue(m_subValue);
         if (m_finishedInput)
         {
-            showSubValue();
+            //showSubValue();
         }
     }
 }
@@ -170,9 +173,10 @@ void Sudoku::updateSubValueRemove(unsigned int removeValue)
     if (!m_hasMainValue)
     {
         m_subValue = m_subValue & (511 - (1 << (removeValue - 1)));
+        checkNumSubValue(m_subValue);
         if (m_finishedInput)
         {
-            showSubValue();
+            //showSubValue();
         }
     }
 }

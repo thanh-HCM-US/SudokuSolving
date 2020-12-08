@@ -18,11 +18,13 @@ public:
 
     void showSubValue();
 
-    void updateMainValue();             //it will be called whenever there only one value in m_subValue
+    void updateMainValue( unsigned int);             //it will be called whenever there only one value in m_subValue
 
     void updateSubValueAdd(unsigned int);//add one more value into m_subValue
 
     void updateSubValueRemove(unsigned int);//remove one more value into m_subValue
+
+    unsigned int getSubValue() {return m_subValue;}
 
     bool isHasMainValue();
 
@@ -38,6 +40,8 @@ private:
     //ex: m_subValue = 0x000110011 => m_mainvalue can receive 1, 2, 5, 6
     //ex: m_subValue = 0x100000001 => m_mainValue can receive 1, 9
     unsigned int m_subValue;
+
+    unsigned int m_numSubValue;
 
     bool m_hasMainValue;
     bool m_finishedInput;
