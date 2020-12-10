@@ -16,6 +16,8 @@ public:
     virtual ~GridPart() {}
 
     void finishedInputButtonClicked();
+    QVector<Sudoku*>::iterator
+            getItOfVectorSudoku();
 private:
     void combineSudokuWithMediator();
 

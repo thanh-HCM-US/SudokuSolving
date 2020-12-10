@@ -3,9 +3,11 @@
 
 #include <QMainWindow>
 #include <QWidget>
-
+#include <QPushButton>
 #include "Gridpart.h"
-#include "RequestPart.h"
+//#include "InputFromSource.h"
+
+class InputFromSource;
 
 namespace Ui {
 class MainWindow;
@@ -20,12 +22,14 @@ public:
     ~MainWindow();
 
     void finishedInputButtonClicked();
+    QVector<Sudoku*>::iterator
+        getItOfVectorSudoku();
 
 private:
     Ui::MainWindow *ui;
 
     GridPart* m_gridPart;
-    QPushButton* m_inputFromSource;
+    InputFromSource* m_inputFromSource;
     QPushButton* m_finishedInput;
     QPushButton* m_stepByStep;
     QPushButton* m_finalResult;

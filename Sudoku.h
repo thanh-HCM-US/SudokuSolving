@@ -32,6 +32,8 @@ public:
 
     void addMediator(Mediator*);
 
+    void setMainValue(int);
+
 private:
     //this is a final resul or input value
     unsigned int m_mainValue;
@@ -49,7 +51,7 @@ private:
     QVector<Mediator*> m_vectorMediator;
 
 public slots:
-    void setMainValue();    //set m_mainValue from key board
+    void setMainValueFromKey();    //set m_mainValue from key board
 };
 
 #endif // SUDOKU_H

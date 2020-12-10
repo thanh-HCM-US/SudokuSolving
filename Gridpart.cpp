@@ -108,3 +108,10 @@ void GridPart::combineSudokuWithMediator()
         }
     }
 }
+
+QVector<Sudoku*>::iterator
+GridPart::getItOfVectorSudoku()
+{
+    QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
+    return it;
+}

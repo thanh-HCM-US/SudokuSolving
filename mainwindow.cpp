@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Gridpart.h"
-#include "RequestPart.h"
 #include "FinishedInputButton.h"
+#include "InputFromSource.h"
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QDebug>
 
 class FinishedInputButton;
 
@@ -18,9 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QVBoxLayout* vBoxLayout = new QVBoxLayout(this);
 
     m_gridPart = new GridPart();
-    //m_requestPart = new RequestPart(this);
 
-    m_inputFromSource = new QPushButton("Input From Source", this);
+    m_inputFromSource = new InputFromSource("Input From Source",this);
     m_inputFromSource->resize(150,40);
 
     m_finishedInput = new FinishedInputButton("Finished Input", this);
@@ -57,4 +57,11 @@ MainWindow::~MainWindow()
 void MainWindow::finishedInputButtonClicked()
 {
     m_gridPart->finishedInputButtonClicked();
+}
+
+QVector<Sudoku*>::iterator
+MainWindow::getItOfVectorSudoku()
+{
+    QVector<Sudoku*>::iterator it = m_gridPart->getItOfVectorSudoku();
+    return it;
 }

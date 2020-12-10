@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include "RequestPart.h"
 #include "mainwindow.h"
 
 class MainWindow;

@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <QString>
+#include <QDebug>
 
 #include "Mediator.h"
 #include "utility.h"
@@ -52,7 +53,9 @@ Sudoku::Sudoku()
 {
     this->setFrameStyle(QFrame::Box);
     this->setFixedSize(45,45);
-    connect(this, &QTextEdit::textChanged, this, &Sudoku::setMainValue);
+    this->setFont(QFont("Arial",20,40));
+    this->setAlignment(Qt::AlignCenter);
+    connect(this, &QTextEdit::textChanged, this, &Sudoku::setMainValueFromKey);
 }
 
 Sudoku::~Sudoku()
@@ -62,13 +65,11 @@ Sudoku::~Sudoku()
 
 void Sudoku::showMainValue()
 {
-
-    QTextCursor textCursor = this->textCursor();
-    this->selectAll();
-    this->setFontPointSize(18);
-    this->setAlignment(Qt::AlignCenter);
-    this->setTextColor(Qt::blue);
-    this->setTextCursor(textCursor);
+    //QTextCursor textCursor = this->textCursor();
+    //this->selectAll();
+    //this->setFontPointSize(18);
+    //this->setAlignment(Qt::AlignCenter);
+    //this->setTextCursor(textCursor);
 }
 
 void Sudoku::showSubValue()
@@ -82,7 +83,7 @@ void Sudoku::showSubValue()
         }
         else
         {
-            strSubValue += " ";
+            strSubValue += "  ";
         }
 
         if ((i == 3) || (i == 6))
@@ -105,7 +106,7 @@ void Sudoku::showSubValue()
     this->setTextCursor(textCursor);
 }
 
-void Sudoku::setMainValue()
+void Sudoku::setMainValueFromKey()
 {
     /*if (m_finishedInput == true)
     {
@@ -147,6 +148,15 @@ void Sudoku::setMainValue()
     m_hasMainValue = true;
 }
 
+void Sudoku::setMainValue(int value)
+{
+    if ((value > 0) && (value <10))
+    {
+        this->setPlainText(QString::number(value));
+        this->setAlignment(Qt::AlignCenter);
+    }
+}
+
 void Sudoku::updateMainValue(unsigned int value)
 {}
 
@@ -176,7 +186,7 @@ void Sudoku::updateSubValueRemove(unsigned int removeValue)
         checkNumSubValue(m_subValue);
         if (m_finishedInput)
         {
-            //showSubValue();
+            showSubValue();
         }
     }
 }

@@ -25,19 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        FinishedInputButton.cpp \
         Gridpart.cpp \
+        InputFromSource.cpp \
         Mediator.cpp \
-        RequestPart.cpp \
         Sudoku.cpp \
+        finishedinputbutton.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
         FinishedInputButton.h \
         Gridpart.h \
+        InputFromSource.h \
         Mediator.h \
-        RequestPart.h \
         Sudoku.h \
         mainwindow.h \
         utility.h
