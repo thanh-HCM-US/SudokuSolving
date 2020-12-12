@@ -3,6 +3,7 @@
 #include <QGridLayout>
 #include <QTime>
 #include <QDebug>
+#include "utility.h"
 
 GridPart::GridPart(QWidget* parent)
     : QWidget (parent)
@@ -114,4 +115,20 @@ GridPart::getItOfVectorSudoku()
 {
     QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
     return it;
+}
+
+bool GridPart::find1()
+{
+    bool result = false;
+    for (int i = 0; i < 81; ++i)
+    {
+        if ((!m_vectorSudoku[i]->isHasMainValue()) && (m_vectorSudoku[i]->getNumSubValue() == 1))
+        {
+            int mainValueFound = convertSubValueToInt(m_vectorSudoku[i]->getSubValue());
+            m_vectorSudoku[i]->setMainValue(mainValueFound);
+            result =true;
+            break;
+        }
+    }
+    return result;
 }

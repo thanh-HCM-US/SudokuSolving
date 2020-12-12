@@ -34,6 +34,12 @@ public:
 
     void setMainValue(int);
 
+    int getNumSubValue() {return static_cast<int>(m_numSubValue);}
+
+    void allotherSudokuUpdateRemove();
+
+    void allotherSudokuUpdateAdd();
+
 private:
     //this is a final resul or input value
     unsigned int m_mainValue;
@@ -42,6 +48,7 @@ private:
     //ex: m_subValue = 0x000110011 => m_mainvalue can receive 1, 2, 5, 6
     //ex: m_subValue = 0x100000001 => m_mainValue can receive 1, 9
     unsigned int m_subValue;
+    QString m_subValueByText = "";
 
     unsigned int m_numSubValue;
 

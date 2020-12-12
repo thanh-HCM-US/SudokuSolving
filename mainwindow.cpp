@@ -3,6 +3,7 @@
 #include "Gridpart.h"
 #include "FinishedInputButton.h"
 #include "InputFromSource.h"
+#include "StepByStep.h"
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QDebug>
@@ -26,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_finishedInput = new FinishedInputButton("Finished Input", this);
     m_finishedInput->resize(150,40);
 
-    m_stepByStep = new QPushButton("Step By Step", this);
+    m_stepByStep = new StepByStep("Step By Step", this);
     m_stepByStep->resize(150, 40);
 
     m_finalResult = new QPushButton("Final Result", this);

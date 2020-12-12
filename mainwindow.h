@@ -5,9 +5,9 @@
 #include <QWidget>
 #include <QPushButton>
 #include "Gridpart.h"
-//#include "InputFromSource.h"
 
 class InputFromSource;
+class StepByStep;
 
 namespace Ui {
 class MainWindow;
@@ -25,13 +25,15 @@ public:
     QVector<Sudoku*>::iterator
         getItOfVectorSudoku();
 
+    bool find1() {m_gridPart->find1();}
+
 private:
     Ui::MainWindow *ui;
 
     GridPart* m_gridPart;
     InputFromSource* m_inputFromSource;
     QPushButton* m_finishedInput;
-    QPushButton* m_stepByStep;
+    StepByStep* m_stepByStep;
     QPushButton* m_finalResult;
     QPushButton* m_quit;
 };

@@ -1,6 +1,9 @@
 #include "FinishedInputButton.h"
+#include "mainwindow.h"
+#include <QtDebug>
 
-FinishedInputButton::FinishedInputButton(QString string, MainWindow *parent)
+
+FinishedInputButton::FinishedInputButton(QString string, QWidget *parent)
     : QPushButton (string, parent),
       m_clicked(false),
       m_parent(parent)
@@ -13,6 +16,6 @@ void FinishedInputButton::clicked()
     if (m_clicked == false)
     {
         m_clicked = true;
-        m_parent->finishedInputButtonClicked();
+        static_cast<MainWindow*>(m_parent)->finishedInputButtonClicked();
     }
 }

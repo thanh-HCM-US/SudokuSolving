@@ -4,10 +4,10 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
-
+#include "mainwindow.h"
 #include "Sudoku.h"
 
-InputFromSource::InputFromSource(QString string, MainWindow *parent)
+InputFromSource::InputFromSource(QString string, QWidget *parent)
     : QPushButton (string, parent),
       m_parent(parent)
 {
@@ -28,7 +28,8 @@ void InputFromSource::showInputWidget()
         qDebug() <<"Cannot open file for reading";
       }
     QTextStream in(&file);
-    QVector<Sudoku*>::iterator itSudoku = m_parent->getItOfVectorSudoku();
+    QVector<Sudoku*>::iterator itSudoku =
+            static_cast<MainWindow*>(m_parent)->getItOfVectorSudoku();
     while (!in.atEnd())
     {
         QString line = in.readLine();

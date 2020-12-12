@@ -28,16 +28,19 @@ SOURCES += \
         Gridpart.cpp \
         InputFromSource.cpp \
         Mediator.cpp \
+        StepByStep.cpp \
         Sudoku.cpp \
         finishedinputbutton.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        utility.cpp
 
 HEADERS += \
         FinishedInputButton.h \
         Gridpart.h \
         InputFromSource.h \
         Mediator.h \
+        StepByStep.h \
         Sudoku.h \
         mainwindow.h \
         utility.h

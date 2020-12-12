@@ -1,14 +1,7 @@
-//#ifndef UTILITY_H
-#define UTILITY_H
+#include "utility.h"
 
-#include "Mediator.h"
-#include "Sudoku.h"
-#include <iostream>
-#include <map>
-#include <QVector>
-
-QString convertItoString(unsigned int i);
-/*{
+QString convertItoString(unsigned int i)
+{
     QString strConverted;
     switch (i) {
     case 1:
@@ -42,10 +35,10 @@ QString convertItoString(unsigned int i);
         break;
     }
     return strConverted;
-}*/
+}
 
-int convertSubValueToInt(unsigned int subValue);
-/*{
+int convertSubValueToInt(unsigned int subValue)
+{
     int result = 0;
     while (subValue != 0)
     {
@@ -53,10 +46,10 @@ int convertSubValueToInt(unsigned int subValue);
         subValue = subValue >> 1;
     }
     return result;
-}*/
+}
 
-QString convertSubValueIntToText(int subValue);
-/*{
+QString convertSubValueIntToText(int subValue)
+{
     QString strSubValue;
     for (unsigned int i = 1; i < 10; ++i)
     {
@@ -74,17 +67,17 @@ QString convertSubValueIntToText(int subValue);
             strSubValue += "\n";
         }
         else if (i == 9)
-        {}
+        {/*nothing todo*/}
         else
         {
             strSubValue += " ";
         }
     }
     return strSubValue;
-}*/
+}
 
-unsigned int checkNumSubValue(unsigned int value);
-/*{
+unsigned int checkNumSubValue(unsigned int value)
+{
     unsigned int count = 0;
     unsigned int tmp = 1;
     for(int i=0; i<9; ++i)
@@ -96,10 +89,10 @@ unsigned int checkNumSubValue(unsigned int value);
         tmp = tmp << 1;
     }
     return count;
-}*/
+}
 
-bool findOnlyOneMatch(Mediator* mediator);
-/*{
+bool findOnlyOneMatch(Mediator* mediator)
+{
     bool result = false;
     std::map<Sudoku*, unsigned int> mapFindOnlyOneMatch;
     unsigned int total = 0;
@@ -136,10 +129,10 @@ bool findOnlyOneMatch(Mediator* mediator);
         }
     }
     return result;
-}*/
+}
 
-bool findDuplicate(Mediator* mediator);
-/*{
+bool findDuplicate(Mediator* mediator)
+{
     bool result =false;
     QVector<Sudoku*> sudokuHas2subValue;
     //find all sudo has 2 subValue, and add all of them into one list
@@ -175,10 +168,10 @@ bool findDuplicate(Mediator* mediator);
         }
     }
     return result;
-}*/
+}
 
-bool findTriplicate(Mediator* mediator);
-/*{
+bool findTriplicate(Mediator* mediator)
+{
     bool result = false;
     QVector<Sudoku*> sudokuHas2or3subValue;
     //find all sudo has 2 or 3 subValue, and add all of them into one list
@@ -230,4 +223,4 @@ bool findTriplicate(Mediator* mediator);
         }
     }
     return result;
-}*/
+}

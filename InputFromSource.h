@@ -4,14 +4,13 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QDebug>
-#include "mainwindow.h"
 
 
 class InputFromSource : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit InputFromSource(QString, MainWindow *parent = nullptr);
+    explicit InputFromSource(QString, QWidget *parent = nullptr);
     void hehe(){}
     void setPath(QString string) { qDebug() << string; m_path = string;}
 
@@ -21,7 +20,7 @@ public slots:
     void showInputWidget();
 
 private:
-    MainWindow* m_parent;
+    QWidget* m_parent;
     QString m_path;
 };
 
