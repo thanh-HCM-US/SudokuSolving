@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
+#include <QTime>
 #include "mainwindow.h"
 #include "Sudoku.h"
 
@@ -22,6 +23,7 @@ void InputFromSource::showInputWidget()
                 "D://",
                 "All File (*.*);;Text File (*.txt)");
 
+    qDebug() << "InputFromSource::showInputWidget start" << QTime::currentTime();
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() <<"Cannot open file for reading";
@@ -42,4 +44,5 @@ void InputFromSource::showInputWidget()
             ++itSudoku;
         }
     }
+    qDebug() << "InputFromSource::showInputWidget stop" << QTime::currentTime();
 }

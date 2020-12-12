@@ -71,7 +71,7 @@ MainWindow::getItOfVectorSudoku()
 
 void MainWindow::sovleAllSudoku()
 {
-    qDebug() << QTime::currentTime() << " start MainWindow::sovleAllSudoku";
+    qDebug() << " start MainWindow::sovleAllSudoku" << QTime::currentTime();
     //QString string = " ";
     bool isGoodJob = true;
     while (m_stepByStep->solveOneStep())
@@ -83,7 +83,6 @@ void MainWindow::sovleAllSudoku()
     {
         if (!(*it)->isHasMainValue())
         {
-            //string = "still any sudoku doesn't be filled";
             isGoodJob = false;
             break;
         }
@@ -96,5 +95,5 @@ void MainWindow::sovleAllSudoku()
     {
         qDebug() << "GOOD JOB";
     }
-    qDebug() << QTime::currentTime() << " stop MainWindow::sovleAllSudoku";
+    qDebug() << " stop MainWindow::sovleAllSudoku" << QTime::currentTime();
 }

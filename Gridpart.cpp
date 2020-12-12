@@ -3,13 +3,46 @@
 #include <QGridLayout>
 #include <QTime>
 #include <QDebug>
+#include <QFrame>
 #include "utility.h"
 
 GridPart::GridPart(QWidget* parent)
     : QWidget (parent)
 {
     QGridLayout* layout = new QGridLayout(this);
-    int row=0;
+    layout->setSpacing(0);
+
+    for(int row = 0; row < 5; row += 1)
+    {
+        for (int column = 0; column < 5; column += 1)
+        {
+            if (((row % 2)==0) && ((column % 2)==0))
+            {
+                QGridLayout* layout3x3 = new QGridLayout(this);
+                layout3x3->setSpacing(0);
+                m_gridLayouts.append(layout3x3);
+                layout->addLayout(layout3x3,row, column);
+            }
+            else if (((row % 2)==0) && ((column % 2)==1))
+            {
+                QFrame* line = new QFrame(this);
+                m_lines.append(line);
+                line->setLineWidth(10);
+                line->setFrameShape(QFrame::VLine);
+                layout->addWidget(line, row, column, 1, 1);
+            }
+            else if (((row % 2)==1) && ((column % 2)==0))
+            {
+                QFrame* line = new QFrame(this);
+                m_lines.append(line);
+                line->setLineWidth(10);
+                line->setFrameShape(QFrame::HLine);
+                layout->addWidget(line, row, column, 1, 1);
+            }
+        }
+    }
+
+    int row=-1;
     int column=0;
     for (int i=0; i<81; ++i)
     {
@@ -24,7 +57,7 @@ GridPart::GridPart(QWidget* parent)
         }
         Sudoku* sudoku = new Sudoku();
         m_vectorSudoku.append(sudoku);
-        layout->addWidget(sudoku, row, column);
+        addSudokuIntoLayout3x3(sudoku, row, column);
     }
     setLayout(layout);
 
@@ -49,7 +82,7 @@ void GridPart::finishedInputButtonClicked()
     {
         (*it)->setFinishedInput(true);
     }
-    qDebug() << QTime::currentTime() << " start";
+
     for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
     {
         if ((*it)->isHasMainValue() == true)
@@ -61,7 +94,6 @@ void GridPart::finishedInputButtonClicked()
             (*it)->showSubValue();
         }
     }
-    qDebug() << QTime::currentTime() << " stop";
 }
 
 void GridPart::combineSudokuWithMediator()
@@ -176,4 +208,53 @@ bool GridPart::findDuplicate()
         }
     }
     return result;
+}
+
+void GridPart::addSudokuIntoLayout3x3(Sudoku* sudoku, int row, int column)
+{
+    if (row < 3)
+    {
+        if (column < 3)
+        {
+            m_gridLayouts[0]->addWidget(sudoku, row, column%3);
+        }
+        else if (column < 6)
+        {
+            m_gridLayouts[1]->addWidget(sudoku, row, column%3);
+        }
+        else
+        {
+            m_gridLayouts[2]->addWidget(sudoku, row, column%3);
+        }
+    }
+    else if (row < 6)
+    {
+        if (column < 3)
+        {
+            m_gridLayouts[3]->addWidget(sudoku, row%3, column%3);
+        }
+        else if (column < 6)
+        {
+            m_gridLayouts[4]->addWidget(sudoku, row%3, column%3);
+        }
+        else
+        {
+            m_gridLayouts[5]->addWidget(sudoku, row%3, column%3);
+        }
+    }
+    else
+    {
+        if (column < 3)
+        {
+            m_gridLayouts[6]->addWidget(sudoku, row%3, column%3);
+        }
+        else if (column < 6)
+        {
+            m_gridLayouts[7]->addWidget(sudoku, row%3, column%3);
+        }
+        else
+        {
+            m_gridLayouts[8]->addWidget(sudoku, row%3, column%3);
+        }
+    }
 }

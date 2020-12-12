@@ -4,6 +4,7 @@
 #include <QGridLayout>
 #include <QVector>
 #include <QWidget>
+#include <QGridLayout>
 
 #include "Sudoku.h"
 
@@ -28,6 +29,10 @@ public:
 private:
     void combineSudokuWithMediator();
 
+    void addSudokuIntoLayout3x3(Sudoku* sudoku, int row, int column);
+
+    QVector<QGridLayout*> m_gridLayouts;
+    QVector<QFrame*> m_lines;
     QVector<Sudoku*> m_vectorSudoku;
     QVector<Mediator*> m_vectorMeditorRow;
     QVector<Mediator*> m_vectorMeditorColumn;
