@@ -132,3 +132,39 @@ bool GridPart::find1()
     }
     return result;
 }
+
+bool GridPart::findOnlyOneMatch()
+{
+    bool result = false;
+    for (int i = 0; i < 9; ++i)
+    {
+        if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorRow[i]))
+        {
+            result = true;
+            break;
+        }
+    }
+    if (!result)
+    {
+        for (int i = 0; i < 9; ++i)
+        {
+            if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorColumn[i]))
+            {
+                result = true;
+                break;
+            }
+        }
+    }
+    if (!result)
+    {
+        for (int i = 0; i < 9; ++i)
+        {
+            if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorSquare[i]))
+            {
+                result = true;
+                break;
+            }
+        }
+    }
+    return result;
+}

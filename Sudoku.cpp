@@ -78,20 +78,22 @@ void Sudoku::setMainValueFromKey()
     allotherSudokuUpdateRemove();
 }
 
-void Sudoku::setMainValue(int value)
+void Sudoku::setMainValue(int value_Dec)
 {
-    if ((value > 0) && (value <10))
+    if ((value_Dec > 0) && (value_Dec <10))
     {
-        this->setPlainText(QString::number(value));
+        this->setPlainText(QString::number(value_Dec));
         this->setAlignment(Qt::AlignCenter);
-        m_mainValue = static_cast<unsigned int>(value);
+        m_mainValue = static_cast<unsigned int>(value_Dec);
         m_hasMainValue = true;
         allotherSudokuUpdateRemove();
     }
 }
 
-void Sudoku::updateMainValue(unsigned int value)
-{}
+void Sudoku::updateMainValue(unsigned int value_Bin)
+{
+
+}
 
 unsigned int Sudoku::getMainValue()
 {

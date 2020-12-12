@@ -117,13 +117,14 @@ bool findOnlyOneMatch(Mediator* mediator)
          it != mapFindOnlyOneMatch.end();
          ++it)
     {
-        unsigned int xorValue = it->second ^ total;
-        if (checkNumSubValue(xorValue) == 1)
+        unsigned int xorValue_Bin = it->second ^ total;
+        if (checkNumSubValue(xorValue_Bin) == 1)
         {
-            it->first->updateMainValue(xorValue);
+            //it->first->updateMainValue(xorValue_Bin);
+            it->first->setMainValue(convertSubValueToInt(xorValue_Bin));
             result = true;
         }
-        else if (checkNumSubValue(xorValue) > 1)
+        else if (checkNumSubValue(xorValue_Bin) > 1)
         {
             //TODO moi o chi nhan 1 gia tri duy nhat , neu co 2 gia tri duy nhat la sai.
         }

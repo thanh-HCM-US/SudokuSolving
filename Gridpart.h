@@ -21,6 +21,8 @@ public:
             getItOfVectorSudoku();
 
     bool find1();
+
+    bool findOnlyOneMatch();
 private:
     void combineSudokuWithMediator();
 

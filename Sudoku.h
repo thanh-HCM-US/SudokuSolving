@@ -18,7 +18,7 @@ public:
 
     void showSubValue();
 
-    void updateMainValue( unsigned int);             //it will be called whenever there only one value in m_subValue
+    void updateMainValue( unsigned int value_Bin);             //it will be called whenever there only one value in m_subValue
 
     void updateSubValueAdd(unsigned int);//add one more value into m_subValue
 

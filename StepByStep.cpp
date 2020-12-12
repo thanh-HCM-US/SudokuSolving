@@ -15,4 +15,8 @@ void StepByStep::solveOneStep()
     {
         return;
     }
+    if (static_cast<MainWindow*>(m_parent)->findOnlyOneMatch())
+    {
+        return;
+    }
 }

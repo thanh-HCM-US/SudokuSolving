@@ -25,7 +25,8 @@ public:
     QVector<Sudoku*>::iterator
         getItOfVectorSudoku();
 
-    bool find1() {m_gridPart->find1();}
+    bool find1() { return m_gridPart->find1();}
+    bool findOnlyOneMatch() { return m_gridPart->findOnlyOneMatch();}
 
 private:
     Ui::MainWindow *ui;
