@@ -21,9 +21,9 @@ public:
         return m_vectorSudoku;
     }
 
-    void allotherSudokuUpdateRemove(Sudoku*, unsigned int);
-    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, unsigned int);
-    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, Sudoku*, unsigned int);
+    void allotherSudokuUpdateRemove(Sudoku*, unsigned int value_Dec);
+    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, unsigned int value_Bin);
+    void allotherSudokuUpdateRemove(Sudoku*, Sudoku*, Sudoku*, unsigned int value_Bin);
     void allotherSudokuUpdateAdd(Sudoku*, unsigned int);
     void allotherSudokuUpdateAdd(Sudoku*, Sudoku*, unsigned int);
     void allotherSudokuUpdateAdd(Sudoku*, Sudoku*, Sudoku*, unsigned int);

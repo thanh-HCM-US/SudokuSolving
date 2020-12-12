@@ -8,9 +8,9 @@
 #include "utility.h"
 
 Sudoku::Sudoku()
-    : m_mainValue(0),
-      m_subValue(511),   // 511 == 0x111111111
-      m_numSubValue(9),
+    : m_mainValue_Dec(0),
+      m_subValue_Bin(511),   // 511 == 0x111111111
+      m_numSubValue_Dec(9),
       m_hasMainValue(false),
       m_finishedInput(false)
 {
@@ -59,7 +59,7 @@ void Sudoku::setMainValueFromKey()
         this->clear();
         mainValue = 0;
         allotherSudokuUpdateAdd();
-        m_mainValue = 0;
+        m_mainValue_Dec = 0;
         return;
     }
     if (mainValue == 0)
@@ -68,12 +68,12 @@ void Sudoku::setMainValueFromKey()
         return;
     }
 
-    if (m_mainValue!=0)         //for case changing m_mainValue
+    if (m_mainValue_Dec!=0)         //for case changing m_mainValue
     {
         allotherSudokuUpdateAdd();
     }
 
-    m_mainValue = mainValue;
+    m_mainValue_Dec = mainValue;
     m_hasMainValue = true;
     allotherSudokuUpdateRemove();
 }
@@ -84,7 +84,7 @@ void Sudoku::setMainValue(int value_Dec)
     {
         this->setPlainText(QString::number(value_Dec));
         this->setAlignment(Qt::AlignCenter);
-        m_mainValue = static_cast<unsigned int>(value_Dec);
+        m_mainValue_Dec = static_cast<unsigned int>(value_Dec);
         m_hasMainValue = true;
         allotherSudokuUpdateRemove();
     }
@@ -97,16 +97,16 @@ void Sudoku::updateMainValue(unsigned int value_Bin)
 
 unsigned int Sudoku::getMainValue()
 {
-    return m_mainValue;
+    return m_mainValue_Dec;
 }
 
 void Sudoku::updateSubValueAdd(unsigned int addValue)
 {
     if (!m_hasMainValue)
     {
-        m_subValue = m_subValue | (1 << (addValue - 1));
-        m_numSubValue = checkNumSubValue(m_subValue);
-        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue));
+        m_subValue_Bin = m_subValue_Bin | (1 << (addValue - 1));
+        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
         if (m_finishedInput)
         {
             showSubValue();
@@ -114,13 +114,27 @@ void Sudoku::updateSubValueAdd(unsigned int addValue)
     }
 }
 
-void Sudoku::updateSubValueRemove(unsigned int removeValue)
+void Sudoku::updateSubValueRemove(unsigned int removeValue_Dec)
 {
     if (!m_hasMainValue)
     {
-        m_subValue = m_subValue & (511 - (1 << (removeValue - 1)));
-        m_numSubValue = checkNumSubValue(m_subValue);
-        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue));
+        m_subValue_Bin = m_subValue_Bin & (511 - (1 << (removeValue_Dec - 1)));
+        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
+        if (m_finishedInput)
+        {
+            showSubValue();
+        }
+    }
+}
+
+void Sudoku::updateSubValueRemove_Bin(unsigned int value_Bin)
+{
+    if (!m_hasMainValue)
+    {
+        m_subValue_Bin = m_subValue_Bin & (511 - value_Bin);
+        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
         if (m_finishedInput)
         {
             showSubValue();
@@ -148,7 +162,7 @@ void Sudoku::allotherSudokuUpdateRemove()
 {
     for (int i=0; i<3; ++i)
     {
-        m_vectorMediator[i]->allotherSudokuUpdateRemove(this, m_mainValue);
+        m_vectorMediator[i]->allotherSudokuUpdateRemove(this, m_mainValue_Dec);
     }
 }
 
@@ -156,6 +170,6 @@ void Sudoku::allotherSudokuUpdateAdd()
 {
     for (int i=0; i<3; ++i)
     {
-        m_vectorMediator[i]->allotherSudokuUpdateAdd(this, m_mainValue);
+        m_vectorMediator[i]->allotherSudokuUpdateAdd(this, m_mainValue_Dec);
     }
 }

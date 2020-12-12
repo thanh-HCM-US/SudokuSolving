@@ -12,7 +12,6 @@ class InputFromSource : public QPushButton
 public:
     explicit InputFromSource(QString, QWidget *parent = nullptr);
     void hehe(){}
-    void setPath(QString string) { qDebug() << string; m_path = string;}
 
 signals:
 
@@ -21,7 +20,6 @@ public slots:
 
 private:
     QWidget* m_parent;
-    QString m_path;
 };
 
 #endif // INPUTFROMSOURCE_H

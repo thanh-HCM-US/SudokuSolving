@@ -23,6 +23,8 @@ public:
     bool find1();
 
     bool findOnlyOneMatch();
+
+    bool findDuplicate();
 private:
     void combineSudokuWithMediator();
 

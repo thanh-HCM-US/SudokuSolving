@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QDebug>
+#include <QTime>
 
 class FinishedInputButton;
 
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_finalResult = new QPushButton("Final Result", this);
     m_finalResult->resize(150,40);
+    connect(m_finalResult, &QPushButton::clicked, this, &MainWindow::sovleAllSudoku);
 
     m_quit = new QPushButton("Quit", this);
     m_quit->resize(150,40);
@@ -65,4 +67,34 @@ MainWindow::getItOfVectorSudoku()
 {
     QVector<Sudoku*>::iterator it = m_gridPart->getItOfVectorSudoku();
     return it;
+}
+
+void MainWindow::sovleAllSudoku()
+{
+    qDebug() << QTime::currentTime() << " start MainWindow::sovleAllSudoku";
+    //QString string = " ";
+    bool isGoodJob = true;
+    while (m_stepByStep->solveOneStep())
+    {}
+
+    QVector<Sudoku*>::iterator it =
+                m_gridPart->getItOfVectorSudoku();
+    for (int i = 0; i < 81; ++i)
+    {
+        if (!(*it)->isHasMainValue())
+        {
+            //string = "still any sudoku doesn't be filled";
+            isGoodJob = false;
+            break;
+        }
+    }
+    if (!isGoodJob)
+    {
+        qDebug() << "still any sudoku doesn't be filled";
+    }
+    else
+    {
+        qDebug() << "GOOD JOB";
+    }
+    qDebug() << QTime::currentTime() << " stop MainWindow::sovleAllSudoku";
 }

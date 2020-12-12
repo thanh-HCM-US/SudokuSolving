@@ -143,27 +143,36 @@ bool GridPart::findOnlyOneMatch()
             result = true;
             break;
         }
-    }
-    if (!result)
-    {
-        for (int i = 0; i < 9; ++i)
+        if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorColumn[i]))
         {
-            if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorColumn[i]))
-            {
-                result = true;
-                break;
-            }
+            result = true;
+            break;
+        }
+        if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorSquare[i]))
+        {
+            result = true;
+            break;
         }
     }
-    if (!result)
+    return result;
+}
+
+bool GridPart::findDuplicate()
+{
+    bool result = false;
+    for (int i = 0; i < 9; ++i)
     {
-        for (int i = 0; i < 9; ++i)
+        if (UTILITY_H::findDuplicate(m_vectorMeditorRow[i]))
         {
-            if (UTILITY_H::findOnlyOneMatch(m_vectorMeditorSquare[i]))
-            {
-                result = true;
-                break;
-            }
+            result = true;
+        }
+        if (UTILITY_H::findDuplicate(m_vectorMeditorColumn[i]))
+        {
+            result = true;
+        }
+        if (UTILITY_H::findDuplicate(m_vectorMeditorSquare[i]))
+        {
+            result = true;
         }
     }
     return result;

@@ -14,7 +14,7 @@ public:
 signals:
 
 public slots:
-    void solveOneStep();
+    bool solveOneStep();
 
 private:
     QWidget* m_parent;

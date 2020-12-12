@@ -22,9 +22,11 @@ public:
 
     void updateSubValueAdd(unsigned int);//add one more value into m_subValue
 
-    void updateSubValueRemove(unsigned int);//remove one more value into m_subValue
+    void updateSubValueRemove(unsigned int value_Dec);//remove one more value into m_subValue
 
-    unsigned int getSubValue() {return m_subValue;}
+    void updateSubValueRemove_Bin(unsigned int value_Bin);
+
+    unsigned int getSubValue() {return m_subValue_Bin;}
 
     bool isHasMainValue();
 
@@ -34,7 +36,7 @@ public:
 
     void setMainValue(int);
 
-    int getNumSubValue() {return static_cast<int>(m_numSubValue);}
+    int getNumSubValue() {return static_cast<int>(m_numSubValue_Dec);}
 
     void allotherSudokuUpdateRemove();
 
@@ -42,15 +44,15 @@ public:
 
 private:
     //this is a final resul or input value
-    unsigned int m_mainValue;
+    unsigned int m_mainValue_Dec;
 
     //m_subValue is present all values which m_mainValue can set
     //ex: m_subValue = 0x000110011 => m_mainvalue can receive 1, 2, 5, 6
     //ex: m_subValue = 0x100000001 => m_mainValue can receive 1, 9
-    unsigned int m_subValue;
+    unsigned int m_subValue_Bin;
     QString m_subValueByText = "";
 
-    unsigned int m_numSubValue;
+    unsigned int m_numSubValue_Dec;
 
     bool m_hasMainValue;
     bool m_finishedInput;

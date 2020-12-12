@@ -9,14 +9,19 @@ StepByStep::StepByStep(QString string, QWidget *parent)
     connect(this, &QPushButton::clicked, this, &StepByStep::solveOneStep);
 }
 
-void StepByStep::solveOneStep()
+bool StepByStep::solveOneStep()
 {
     if (static_cast<MainWindow*>(m_parent)->find1())
     {
-        return;
+        return true;
     }
     if (static_cast<MainWindow*>(m_parent)->findOnlyOneMatch())
     {
-        return;
+        return true;
     }
+    if (static_cast<MainWindow*>(m_parent)->findDuplicate())
+    {
+        return true;
+    }
+    return false;
 }

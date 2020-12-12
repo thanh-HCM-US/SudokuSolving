@@ -1,4 +1,5 @@
 #include "Mediator.h"
+#include <QtDebug>
 
 Mediator::Mediator(GridPart* parent)
     : m_parent(parent)
@@ -11,7 +12,7 @@ void Mediator::addSudoku(Sudoku* sudoku)
     m_vectorSudoku.append(sudoku);
 }
 
-void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku, unsigned int value)
+void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku, unsigned int value_Dec)
 {
     for (QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
          it != m_vectorSudoku.end();
@@ -19,14 +20,14 @@ void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku, unsigned int value)
     {
         if (*it != sudoku)
         {
-            (*it)->updateSubValueRemove(value);
+            (*it)->updateSubValueRemove(value_Dec);
         }
     }
 }
 
 void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
                                           Sudoku* sudoku2,
-                                          unsigned int value)
+                                          unsigned int value_Bin)
 {
     for (QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
          it != m_vectorSudoku.end();
@@ -34,7 +35,7 @@ void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
     {
         if ((*it != sudoku1) && (*it != sudoku2))
         {
-            //TODO
+            (*it)->updateSubValueRemove_Bin(value_Bin);
         }
     }
 }
@@ -42,7 +43,7 @@ void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
 void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
                                           Sudoku* sudoku2,
                                           Sudoku* sudoku3,
-                                          unsigned int value)
+                                          unsigned int value_Bin)
 {
     for (QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
          it != m_vectorSudoku.end();

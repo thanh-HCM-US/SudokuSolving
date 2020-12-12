@@ -21,7 +21,6 @@ void InputFromSource::showInputWidget()
                 tr("Open    File"),
                 "D://",
                 "All File (*.*);;Text File (*.txt)");
-    m_path = filename;
 
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {

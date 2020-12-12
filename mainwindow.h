@@ -27,6 +27,9 @@ public:
 
     bool find1() { return m_gridPart->find1();}
     bool findOnlyOneMatch() { return m_gridPart->findOnlyOneMatch();}
+    bool findDuplicate() {return  m_gridPart->findDuplicate();}
+
+    void sovleAllSudoku();
 
 private:
     Ui::MainWindow *ui;
