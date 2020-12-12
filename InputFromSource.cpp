@@ -34,7 +34,7 @@ void InputFromSource::showInputWidget()
     while (!in.atEnd())
     {
         QString line = in.readLine();
-        QRegExp rx("[,]");// match a comma or a space
+        QRegExp rx("[,]");// match a comma
         QStringList list = line.split(rx, QString::SkipEmptyParts);
         for (QStringList::iterator it = list.begin();
              it != list.end();

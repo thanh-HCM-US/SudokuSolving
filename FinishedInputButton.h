@@ -10,6 +10,7 @@ class FinishedInputButton : public QPushButton
     Q_OBJECT
 public:
     explicit FinishedInputButton(QString, QWidget* parent = nullptr);
+    virtual ~FinishedInputButton() {}
 
 signals:
 

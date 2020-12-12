@@ -1,4 +1,4 @@
-#include "Gridpart.h"
+#include "GridSudoku.h"
 #include "Mediator.h"
 #include <QGridLayout>
 #include <QTime>
@@ -6,7 +6,7 @@
 #include <QFrame>
 #include "utility.h"
 
-GridPart::GridPart(QWidget* parent)
+GridSudoku::GridSudoku(QWidget* parent)
     : QWidget (parent)
 {
     QGridLayout* layout = new QGridLayout(this);
@@ -75,7 +75,17 @@ GridPart::GridPart(QWidget* parent)
     combineSudokuWithMediator();
 }
 
-void GridPart::finishedInputButtonClicked()
+GridSudoku::~GridSudoku()
+{
+    m_gridLayouts.clear();
+    m_lines.clear();
+    m_vectorSudoku.clear();
+    m_vectorMeditorRow.clear();
+    m_vectorMeditorColumn.clear();
+    m_vectorMeditorSquare.clear();
+}
+
+void GridSudoku::finishedInputButtonClicked()
 {
     QVector<Sudoku*>::iterator it;
     for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
@@ -85,18 +95,14 @@ void GridPart::finishedInputButtonClicked()
 
     for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
     {
-        if ((*it)->isHasMainValue() == true)
-        {
-            (*it)->showMainValue();
-        }
-        else
+        if ((*it)->isHasMainValue() == false)
         {
             (*it)->showSubValue();
         }
     }
 }
 
-void GridPart::combineSudokuWithMediator()
+void GridSudoku::combineSudokuWithMediator()
 {
     for (int i=0; i<81; ++i)
     {
@@ -143,13 +149,13 @@ void GridPart::combineSudokuWithMediator()
 }
 
 QVector<Sudoku*>::iterator
-GridPart::getItOfVectorSudoku()
+GridSudoku::getItOfVectorSudoku()
 {
     QVector<Sudoku*>::iterator it = m_vectorSudoku.begin();
     return it;
 }
 
-bool GridPart::find1()
+bool GridSudoku::find1()
 {
     bool result = false;
     for (int i = 0; i < 81; ++i)
@@ -165,7 +171,7 @@ bool GridPart::find1()
     return result;
 }
 
-bool GridPart::findOnlyOneMatch()
+bool GridSudoku::findOnlyOneMatch()
 {
     bool result = false;
     for (int i = 0; i < 9; ++i)
@@ -189,7 +195,7 @@ bool GridPart::findOnlyOneMatch()
     return result;
 }
 
-bool GridPart::findDuplicate()
+bool GridSudoku::findDuplicate()
 {
     bool result = false;
     for (int i = 0; i < 9; ++i)
@@ -210,7 +216,7 @@ bool GridPart::findDuplicate()
     return result;
 }
 
-void GridPart::addSudokuIntoLayout3x3(Sudoku* sudoku, int row, int column)
+void GridSudoku::addSudokuIntoLayout3x3(Sudoku* sudoku, int row, int column)
 {
     if (row < 3)
     {

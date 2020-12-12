@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Gridpart.h"
+#include "GridSudoku.h"
 #include "FinishedInputButton.h"
 #include "InputFromSource.h"
 #include "StepByStep.h"
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QHBoxLayout* hBoxLayout = qobject_cast<QHBoxLayout*>(this->layout());
     QVBoxLayout* vBoxLayout = new QVBoxLayout(this);
 
-    m_gridPart = new GridPart();
+    m_gridSudoku = new GridSudoku();
 
     m_inputFromSource = new InputFromSource("Input From Source",this);
     m_inputFromSource->resize(150,40);
@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vBoxLayout->addWidget(m_quit);
     vBoxLayout->addStretch(1);
 
-    hBoxLayout->addWidget(m_gridPart);
+    hBoxLayout->addWidget(m_gridSudoku);
     hBoxLayout->addLayout(vBoxLayout);
     setLayout(hBoxLayout);
 }
@@ -55,30 +55,38 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete m_gridSudoku;
+    delete m_inputFromSource;
+    delete m_finishedInput;
+    delete m_stepByStep;
+    delete m_finalResult;
+    delete m_quit;
 }
 
 void MainWindow::finishedInputButtonClicked()
 {
-    m_gridPart->finishedInputButtonClicked();
+    m_gridSudoku->finishedInputButtonClicked();
 }
 
 QVector<Sudoku*>::iterator
 MainWindow::getItOfVectorSudoku()
 {
-    QVector<Sudoku*>::iterator it = m_gridPart->getItOfVectorSudoku();
+    QVector<Sudoku*>::iterator it = m_gridSudoku->getItOfVectorSudoku();
     return it;
 }
 
 void MainWindow::sovleAllSudoku()
 {
     qDebug() << " start MainWindow::sovleAllSudoku" << QTime::currentTime();
-    //QString string = " ";
-    bool isGoodJob = true;
+
     while (m_stepByStep->solveOneStep())
-    {}
+    {   //no thing to do
+        //just wating until all sudoku square will be filled
+    }
 
     QVector<Sudoku*>::iterator it =
-                m_gridPart->getItOfVectorSudoku();
+                m_gridSudoku->getItOfVectorSudoku();
+    bool isGoodJob = true;
     for (int i = 0; i < 81; ++i)
     {
         if (!(*it)->isHasMainValue())
@@ -87,6 +95,7 @@ void MainWindow::sovleAllSudoku()
             break;
         }
     }
+
     if (!isGoodJob)
     {
         qDebug() << "still any sudoku doesn't be filled";

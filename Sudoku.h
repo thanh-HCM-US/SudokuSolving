@@ -10,31 +10,23 @@ class Sudoku : public QTextEdit
 {
 public:
     explicit Sudoku();
-    virtual ~Sudoku();
+    virtual ~Sudoku() {}
+
+    void setMainValue(int);
 
     unsigned int getMainValue();
 
-    void showMainValue();
+    bool isHasMainValue();
 
     void showSubValue();
 
-    void updateMainValue( unsigned int value_Bin);             //it will be called whenever there only one value in m_subValue
-
-    void updateSubValueAdd(unsigned int);//add one more value into m_subValue
-
-    void updateSubValueRemove(unsigned int value_Dec);//remove one more value into m_subValue
-
-    void updateSubValueRemove_Bin(unsigned int value_Bin);
+    void updateSubValue(bool isRemove, bool isDecimal, unsigned int value);
 
     unsigned int getSubValue() {return m_subValue_Bin;}
-
-    bool isHasMainValue();
 
     void setFinishedInput(bool);
 
     void addMediator(Mediator*);
-
-    void setMainValue(int);
 
     int getNumSubValue() {return static_cast<int>(m_numSubValue_Dec);}
 

@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QPushButton>
-#include "Gridpart.h"
+#include "GridSudoku.h"
 
 class InputFromSource;
 class StepByStep;
@@ -25,16 +25,16 @@ public:
     QVector<Sudoku*>::iterator
         getItOfVectorSudoku();
 
-    bool find1() { return m_gridPart->find1();}
-    bool findOnlyOneMatch() { return m_gridPart->findOnlyOneMatch();}
-    bool findDuplicate() {return  m_gridPart->findDuplicate();}
+    bool find1() { return m_gridSudoku->find1();}
+    bool findOnlyOneMatch() { return m_gridSudoku->findOnlyOneMatch();}
+    bool findDuplicate() {return  m_gridSudoku->findDuplicate();}
 
     void sovleAllSudoku();
 
 private:
     Ui::MainWindow *ui;
 
-    GridPart* m_gridPart;
+    GridSudoku* m_gridSudoku;
     InputFromSource* m_inputFromSource;
     QPushButton* m_finishedInput;
     StepByStep* m_stepByStep;

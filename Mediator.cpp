@@ -1,10 +1,9 @@
 #include "Mediator.h"
 #include <QtDebug>
 
-Mediator::Mediator(GridPart* parent)
+Mediator::Mediator(GridSudoku* parent)
     : m_parent(parent)
 {
-
 }
 
 void Mediator::addSudoku(Sudoku* sudoku)
@@ -20,7 +19,7 @@ void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku, unsigned int value_Dec
     {
         if (*it != sudoku)
         {
-            (*it)->updateSubValueRemove(value_Dec);
+            (*it)->updateSubValue(true,true,value_Dec);
         }
     }
 }
@@ -35,11 +34,12 @@ void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
     {
         if ((*it != sudoku1) && (*it != sudoku2))
         {
-            (*it)->updateSubValueRemove_Bin(value_Bin);
+            (*it)->updateSubValue(true,false,value_Bin);
         }
     }
 }
 
+//at now, I don't need to use this method to solving sudoku
 void Mediator::allotherSudokuUpdateRemove(Sudoku* sudoku1,
                                           Sudoku* sudoku2,
                                           Sudoku* sudoku3,
@@ -64,11 +64,12 @@ void Mediator::allotherSudokuUpdateAdd(Sudoku* sudoku, unsigned int value)
     {
         if (*it != sudoku)
         {
-            (*it)->updateSubValueAdd(value);
+            (*it)->updateSubValue(false,true,value);
         }
     }
 }
 
+//at now, I don't need to use this method to solving sudoku
 void Mediator::allotherSudokuUpdateAdd(Sudoku* sudoku1,
                                        Sudoku* sudoku2,
                                        unsigned int value)
@@ -84,6 +85,7 @@ void Mediator::allotherSudokuUpdateAdd(Sudoku* sudoku1,
     }
 }
 
+//at now, I don't need to use this method to solving sudoku
 void Mediator::allotherSudokuUpdateAdd(Sudoku* sudoku1,
                                        Sudoku* sudoku2,
                                        Sudoku* sudoku3,

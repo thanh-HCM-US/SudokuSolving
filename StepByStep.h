@@ -10,6 +10,7 @@ class StepByStep : public QPushButton
     Q_OBJECT
 public:
     explicit StepByStep(QString, QWidget *parent = nullptr);
+    virtual ~StepByStep(){}
 
 signals:
 

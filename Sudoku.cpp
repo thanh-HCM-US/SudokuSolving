@@ -21,20 +21,6 @@ Sudoku::Sudoku()
     connect(this, &QTextEdit::textChanged, this, &Sudoku::setMainValueFromKey);
 }
 
-Sudoku::~Sudoku()
-{
-    std::cout << "out";
-}
-
-void Sudoku::showMainValue()
-{
-    //QTextCursor textCursor = this->textCursor();
-    //this->selectAll();
-    //this->setFontPointSize(18);
-    //this->setAlignment(Qt::AlignCenter);
-    //this->setTextCursor(textCursor);
-}
-
 void Sudoku::showSubValue()
 {
     this->setText(m_subValueByText);
@@ -90,51 +76,44 @@ void Sudoku::setMainValue(int value_Dec)
     }
 }
 
-void Sudoku::updateMainValue(unsigned int value_Bin)
-{
-
-}
-
 unsigned int Sudoku::getMainValue()
 {
     return m_mainValue_Dec;
 }
 
-void Sudoku::updateSubValueAdd(unsigned int addValue)
+void Sudoku::updateSubValue(bool isRemove, bool isDecimal, unsigned int value)
 {
     if (!m_hasMainValue)
     {
-        m_subValue_Bin = m_subValue_Bin | (1 << (addValue - 1));
-        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
-        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
-        if (m_finishedInput)
+        if (isRemove)
         {
-            showSubValue();
+            if (isDecimal)
+            {
+                //for case, there is another sudoku be set mainValue
+                //so, subValue at here need to be remove a value (Decimal) as 1, 3, 5, 6
+                m_subValue_Bin = m_subValue_Bin & (511 - (1 << (value - 1)));
+                m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+                m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
+            }
+            else        // Binary number
+            {
+                //for case, remove some subValue
+                //ex: subValue is {1,2,3,5,7} = 0x001010111, it be remove {1,9} = 0x100000001
+                m_subValue_Bin = m_subValue_Bin & (511 - value);
+                m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+                m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
+            }
         }
-    }
-}
-
-void Sudoku::updateSubValueRemove(unsigned int removeValue_Dec)
-{
-    if (!m_hasMainValue)
-    {
-        m_subValue_Bin = m_subValue_Bin & (511 - (1 << (removeValue_Dec - 1)));
-        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
-        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
-        if (m_finishedInput)
+        else    //it will add some one or more subvalue
         {
-            showSubValue();
+            if (isDecimal)
+            {
+                m_subValue_Bin = m_subValue_Bin | (1 << (value - 1));
+                m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
+                m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
+            }
         }
-    }
-}
 
-void Sudoku::updateSubValueRemove_Bin(unsigned int value_Bin)
-{
-    if (!m_hasMainValue)
-    {
-        m_subValue_Bin = m_subValue_Bin & (511 - value_Bin);
-        m_numSubValue_Dec = checkNumSubValue(m_subValue_Bin);
-        m_subValueByText = convertSubValueIntToText(static_cast<int>(m_subValue_Bin));
         if (m_finishedInput)
         {
             showSubValue();

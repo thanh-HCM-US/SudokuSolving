@@ -11,6 +11,7 @@ class InputFromSource : public QPushButton
     Q_OBJECT
 public:
     explicit InputFromSource(QString, QWidget *parent = nullptr);
+    virtual ~InputFromSource() {}
     void hehe(){}
 
 signals:

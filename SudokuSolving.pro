@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Gridpart.cpp \
+        GridSudoku.cpp \
         InputFromSource.cpp \
         Mediator.cpp \
         StepByStep.cpp \
@@ -37,7 +37,7 @@ SOURCES += \
 
 HEADERS += \
         FinishedInputButton.h \
-        Gridpart.h \
+        GridSudoku.h \
         InputFromSource.h \
         Mediator.h \
         StepByStep.h \

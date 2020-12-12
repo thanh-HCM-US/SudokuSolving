@@ -10,11 +10,11 @@
 
 class Mediator;
 
-class GridPart : public QWidget
+class GridSudoku : public QWidget
 {
 public:
-    GridPart(QWidget* parent = nullptr);
-    virtual ~GridPart() {}
+    GridSudoku(QWidget* parent = nullptr);
+    virtual ~GridSudoku();
 
     void finishedInputButtonClicked();
 

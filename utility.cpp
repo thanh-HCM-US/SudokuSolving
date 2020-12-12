@@ -120,7 +120,6 @@ bool findOnlyOneMatch(Mediator* mediator)
         unsigned int xorValue_Bin = it->second ^ total;
         if (checkNumSubValue(xorValue_Bin) == 1)
         {
-            //it->first->updateMainValue(xorValue_Bin);
             it->first->setMainValue(convertSubValueToInt(xorValue_Bin));
             result = true;
         }
@@ -218,7 +217,7 @@ bool findTriplicate(Mediator* mediator)
             if (resultOfForLoop == true)
                 break;
         }
-        if (resultOfForLoop = false)
+        if (resultOfForLoop == false)
         {
             sudokuHas2or3subValue.erase(&sudokuHas2or3subValue[0]);
         }

@@ -4,15 +4,16 @@
 #include <QVector>
 
 #include "Sudoku.h"
-#include <Gridpart.h>
+#include <GridSudoku.h>
 
 class Sudoku;
-class GridPart;
+class GridSudoku;
 
 class Mediator
 {
 public:
-    Mediator(GridPart*);
+    Mediator(GridSudoku*);
+    ~Mediator() {}      //list Sudoku* will be deleted at m_parent
 
     void addSudoku(Sudoku*);
 
@@ -30,7 +31,7 @@ public:
 
 private:
     QVector<Sudoku*> m_vectorSudoku;
-    GridPart* m_parent;
+    GridSudoku* m_parent;
 };
 
 #endif // MEDIATOR_H
