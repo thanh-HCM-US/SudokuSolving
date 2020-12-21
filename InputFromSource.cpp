@@ -40,7 +40,10 @@ void InputFromSource::showInputWidget()
              it != list.end();
              ++it)
         {
-            (*itSudoku)->setMainValue((*it).toInt());
+            if((*it).toInt() != 0)
+            {
+                (*itSudoku)->setMainValue((*it).toInt());
+            }
             ++itSudoku;
         }
     }

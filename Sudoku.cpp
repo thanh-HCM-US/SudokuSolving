@@ -10,6 +10,7 @@
 Sudoku::Sudoku()
     : m_mainValue_Dec(0),
       m_subValue_Bin(511),   // 511 == 0x111111111
+      m_subValueByText(convertSubValueIntToText(static_cast<int>(m_subValue_Bin))),
       m_numSubValue_Dec(9),
       m_hasMainValue(false),
       m_finishedInput(false)

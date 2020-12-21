@@ -87,13 +87,14 @@ void MainWindow::sovleAllSudoku()
     QVector<Sudoku*>::iterator it =
                 m_gridSudoku->getItOfVectorSudoku();
     bool isGoodJob = true;
-    for (int i = 0; i < 81; ++i)
+    while (it != nullptr)
     {
         if (!(*it)->isHasMainValue())
         {
             isGoodJob = false;
             break;
         }
+        ++it;
     }
 
     if (!isGoodJob)

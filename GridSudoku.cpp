@@ -91,15 +91,19 @@ void GridSudoku::finishedInputButtonClicked()
     for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
     {
         (*it)->setFinishedInput(true);
-    }
-
-    for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
-    {
         if ((*it)->isHasMainValue() == false)
         {
             (*it)->showSubValue();
         }
     }
+
+    /*for (it = m_vectorSudoku.begin(); it != m_vectorSudoku.end(); ++it)
+    {
+        if ((*it)->isHasMainValue() == false)
+        {
+            (*it)->showSubValue();
+        }
+    }*/
 }
 
 void GridSudoku::combineSudokuWithMediator()
